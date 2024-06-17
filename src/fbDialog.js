@@ -6,28 +6,13 @@ const FacebookLogin = () => {
     initializeFacebook();
   }, []);
 
-  const checkLoginState = () => {
-    window.FB.getLoginStatus(function (response) {
-      statusChangeCallback(response);
-    });
-  };
-
-  const statusChangeCallback = (response) => {
-    if (response.status === "connected") {
-      console.log("Logged in and authenticated", response);
-      // Handle authenticated user here
-    } else {
-      console.log("Not authenticated");
-    }
-  };
-
   const handleFBLogin = () => {
     window.FB.login(
       function (response) {
         if (response.status === "connected") {
           // Get and display user information
           window.FB.api("/me", function (response) {
-            console.log("Good to see you, " + response.name + ".");
+            console.log("Good to see you, " + response.name + ".", response);
           });
         } else {
           console.log("user is not logged in");
